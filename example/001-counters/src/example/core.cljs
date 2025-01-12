@@ -15,11 +15,7 @@
      ($ :h2 "Reactive counters")
      (for [i (range nb-counters)]
        (let [counter-state (sr/create-state (* i 100))]
-         (my-counter counter-state)))
-     ($ :h2 "Lazy effects")
-     ($ :div "The effects are lazy, the user decides when to re-run them. Click the button to update the DOM."
-        ($ :div
-           ($ :button {:on-click #(sr/re-run-stale-effectful-nodes)} "Run effects")))))
+         (my-counter counter-state)))))
 
 ;; Shadow-CLJS hooks: start & reload the app
 

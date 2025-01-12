@@ -64,12 +64,20 @@
     {:effects @all-effects
      :elements elements}))
 
+(defn- re-run-stale-effectful-nodes-at-next-frame []
+  (js/requestAnimationFrame (fn []
+                              (sr/re-run-stale-effectful-nodes)
+                              (re-run-stale-effectful-nodes-at-next-frame))))
+
 (defn render [^js/Element parent-element vcup]
   (let [{:keys [effects elements]} (process-vcup vcup)]
     ;; Set all the elements as children of parent-element
     (.apply (.-replaceChildren parent-element) parent-element (to-array elements))
-    ;; Run all the effects
-    (run! sr/run-if-needed effects)))
+    ;; Run all the effects once
+    (run! sr/run-if-needed effects)
+
+    ;; Automatically refresh the DOM by re-running the effects which need a re-run.
+    (re-run-stale-effectful-nodes-at-next-frame)))
 
 (defn dispose-render-effects []
   ;; TODO: dispose all the effects used for the rendering and the DOM updates.
