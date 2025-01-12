@@ -14,5 +14,7 @@ The source code is currently undergoing a total rewrite.
 
 You can follow the progress and learn about its implementation at https://blog.404.taipei/series/vrac-dev-log
 
-In the [blog-posts folder](blog-posts/), you can find a Clojure project for each blog article of the series.
-Each project is runnable and contains a version of the web framework in the making.
+In the [example folder](example/), you can find some projects which are using Vrac.
+
+The articles in the blog are commenting the commits in a presentable manner, and you can browse the commits
+on Github to see what that mean in terms of changes in the source code.
